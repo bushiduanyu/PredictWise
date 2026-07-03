@@ -67,7 +67,7 @@ For the first stage of this project, `Machine failure` is used as the primary pr
 
 ## Planned Workflow
 
-```text
+
 Industrial Sensor Data
         ↓
 Data Cleaning and Inspection
@@ -81,3 +81,36 @@ Machine Learning Model Development
 Failure Prediction
         ↓
 Maintenance Recommendation
+
+
+## Baseline Model Results
+
+Two logistic regression baseline models were developed for binary machine failure prediction:
+
+1. Standard Logistic Regression
+2. Balanced Logistic Regression with `class_weight="balanced"`
+
+Because the dataset is highly imbalanced, with only about 3.39% failure cases, model performance was evaluated using accuracy, precision, recall, F1-score, ROC-AUC, and confusion matrix analysis.
+
+### Standard Logistic Regression
+
+The standard logistic regression model achieved high overall accuracy, but its failure-class recall was low. This means the model was conservative when predicting failures. It produced fewer false alarms, but it missed many actual machine failure cases.
+
+### Balanced Logistic Regression
+
+The balanced logistic regression model significantly improved failure-class recall by assigning more weight to the minority failure class during training. This allowed the model to detect most actual failure cases. However, this improvement came with lower precision, meaning the model also produced more false alarms.
+
+### Key Insight
+
+The baseline models show a clear trade-off between precision and recall. In predictive maintenance, this trade-off is important because missing a real machine failure can lead to unplanned downtime, while too many false alarms can increase unnecessary maintenance work.
+
+At this stage, the goal is not to produce a perfect model, but to establish a baseline and understand the modeling challenge. The next stage will compare logistic regression with tree-based models such as Random Forest, which may better capture nonlinear interactions among operating variables.
+
+### Next Steps
+
+- Train and evaluate Random Forest models
+- Compare standard and class-weighted approaches
+- Create a model comparison table
+- Analyze feature importance
+- Explore threshold tuning to control the precision-recall trade-off
+- Add precision-recall curve analysis
