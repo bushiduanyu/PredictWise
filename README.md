@@ -234,9 +234,9 @@ Overall, the feature importance analysis supports the engineering interpretation
 - [x] Precision-recall analysis
 - [x] Feature importance analysis
 - [x] Model interpretation
-- [ ] Save final visualizations to assets folder
-- [ ] Build Streamlit prediction app
-- [ ] Final README and project documentation
+- [x] Save final visualizations to assets folder
+- [x] Build Streamlit prediction app
+- [x] Final README and project documentation
 
 ---
 
