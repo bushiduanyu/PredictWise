@@ -1,5 +1,16 @@
 # PredictWise: Predictive Maintenance System
 
+A smart manufacturing machine learning project that predicts industrial machine failure risk using sensor data, engineered mechanical features, threshold tuning, and an interactive Streamlit application.
+
+## Streamlit App Preview
+
+### Operating Overview
+
+![Operating Overview](assets/Overview.png)
+
+The Streamlit application allows users to input machine operating conditions and receive a predicted failure probability, risk level, decision threshold, and maintenance recommendation.
+
+
 ## Project Overview
 
 PredictWise is a machine learning project designed to predict industrial machine failures using manufacturing sensor data. In modern manufacturing systems, unexpected equipment failures can cause production downtime, quality issues, maintenance cost increases, and delivery delays. Traditional maintenance strategies often rely on either reactive maintenance, where machines are repaired after failure, or scheduled maintenance, where machines are serviced at fixed intervals regardless of their actual condition.
@@ -10,6 +21,17 @@ PredictWise connects mechanical engineering, manufacturing systems, and machine 
 
 ---
 
+## Key Results
+
+- Built an end-to-end predictive maintenance workflow using the AI4I 2020 dataset
+- Engineered mechanical condition features including `Power proxy [W]` and `Temperature difference [K]`
+- Compared Logistic Regression, Balanced Logistic Regression, Random Forest, and Balanced Random Forest models
+- Selected the standard Random Forest model as the current best model based on F1-score and practical precision-recall balance
+- Achieved an F1-score of 0.8455 and ROC-AUC of 0.9659 with the standard Random Forest model
+- Tuned the classification threshold to 0.4 to support predictive maintenance decision-making
+- Built an interactive Streamlit app that outputs failure probability, risk level, and maintenance recommendations
+
+---
 ## Engineering Problem
 
 Unplanned machine failure is a major challenge in manufacturing environments. A single machine failure can interrupt production flow, reduce overall equipment effectiveness, increase scrap rate, and create additional maintenance costs.
@@ -30,10 +52,12 @@ The main objectives of this project are:
 - Analyze the relationship between operating conditions and machine failure
 - Identify important failure-related features such as tool wear, torque, rotational speed, and temperature behavior
 - Engineer new features that better represent machine operating conditions
-- Build baseline machine learning models for binary failure prediction
-- Evaluate model performance using appropriate classification metrics
-- Develop interpretable insights that can support maintenance decisions
-
+- Build and compare machine learning models for binary failure prediction
+- Evaluate model performance using appropriate classification metrics for imbalanced data
+- Tune the classification threshold to balance failure detection and false alarms
+- Interpret model behavior using feature importance analysis
+- Build an interactive Streamlit application for machine failure risk prediction
+- Develop interpretable insights that can support maintenance decision-making
 ---
 
 ## Dataset
@@ -65,9 +89,10 @@ For the first stage of this project, `Machine failure` is used as the primary pr
 
 ---
 
-## Planned Workflow
+## Workflow
 
 
+```text
 Industrial Sensor Data
         ↓
 Data Cleaning and Inspection
@@ -78,9 +103,14 @@ Feature Engineering
         ↓
 Machine Learning Model Development
         ↓
-Failure Prediction
+Threshold Tuning and Model Interpretation
+        ↓
+Streamlit Failure Risk Prediction App
         ↓
 Maintenance Recommendation
+```
+
+---
 
 
 ## Baseline Model Results
@@ -239,18 +269,79 @@ Overall, the feature importance analysis supports the engineering interpretation
 - [x] Final README and project documentation
 
 ---
+---
 
-## Updated Next Steps
+## How to Run the App Locally
 
-The next stage of the project will focus on turning the model into a simple interactive decision-support tool.
+Clone the repository:
 
-Planned next steps:
+```bash
+git clone https://github.com/bushiduanyu/PredictWise.git
+cd PredictWise
+```
 
-- Save key visualizations to the `assets/` folder
-- Build a Streamlit app for PredictWise
-- Allow users to input machine operating conditions
-- Output predicted failure probability
-- Display risk level based on the selected threshold
-- Provide simple maintenance recommendations
-- Save the trained Random Forest model for app deployment
-- Finalize project documentation and screenshots
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Run the Streamlit app:
+
+```bash
+streamlit run app/app.py
+```
+
+---
+
+## Project Structure
+
+```text
+PredictWise/
+├── app/
+│   └── app.py
+├── assets/
+│   └── Overview.png
+├── data/
+│   └── Predictive Maintenance Dataset.csv
+├── models/
+│   ├── random_forest_model.pkl
+│   ├── feature_columns.pkl
+│   └── recommended_threshold.pkl
+├── notebooks/
+│   ├── EDA.ipynb
+│   ├── Feature_Engineering.ipynb
+│   └── Baseline_Model.ipynb
+├── src/
+│   └── preprocessing.py
+├── README.md
+└── requirements.txt
+```
+
+---
+
+## What This Project Demonstrates
+
+This project demonstrates an end-to-end smart manufacturing machine learning workflow:
+
+- Industrial sensor data analysis
+- Failure pattern exploration
+- Feature engineering based on mechanical operating variables
+- Binary classification under severe class imbalance
+- Model comparison using precision, recall, F1-score, ROC-AUC, and precision-recall analysis
+- Threshold tuning for maintenance decision-making
+- Random Forest feature importance interpretation
+- Deployment of a trained model through an interactive Streamlit application
+
+---
+
+## Future Work
+
+Potential future improvements include:
+
+- Add SHAP-based model explainability for more detailed feature-level interpretation
+- Compare additional models such as XGBoost, Gradient Boosting, or Support Vector Machines
+- Extend the project from binary failure prediction to failure-type classification
+- Add historical trend visualization for simulated machine monitoring
+- Deploy the Streamlit app online for public access
+- Connect the model to a live or simulated sensor data stream
